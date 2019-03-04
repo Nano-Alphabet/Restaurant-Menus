@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MenuItems</title>
+    <style>
+        body
+        {
+            width: 600px;
+            margin:10px auto;
+            border: 2px solid black;
+            border-radius: 25px;
+        }
+        .heading
+        {
+        	text-align: center;
+        	margin-top: 0px;
+        }
+        .names li
+        {
+            list-style: none;
+            color: black;
+        }
+        .names li h3
+        {
+          font-weight: 500; padding: 0px; margin: 0px;
+        }
+        .names li p
+        {
+          font-family: cursive; font-size: 14px; margin: 0px 10px;
+        }
+        .table
+        {
+        	display: none;
+        }
+        .del
+        {
+        	display: none;
+        }
+        .content
+        {
+          margin: auto; 
+          width: 300px;
+        }
+    		.bottom:hover
+    		{
+    			text-decoration:underline;
+    		}
+        .sub
+        {
+          display: block; 
+          margin: 10px auto;
+        }
+        .btn:hover
+        {
+          text-decoration:underline;
+        }
+		@media only screen and (max-width: 1000px) and (min-width: 200px) {
+  			body
+        {
+          width: 97%;
+        }
+        .heading
+        {
+          font-size: 800%;
+        }
+        .names li h3
+        {
+          font-size: 350%;
+        }
+        .names li p
+        {
+          font-size: 200%;;
+        }
+        .content
+        {
+          font-size: 160%;
+          width: 97%;
+        }
+        .btn
+        {
+          display: block;
+          font-size: 170%;
+          border: 2px solid black;
+          width: 97%;
+          margin:30px auto;
+        }
+        .bottom
+        {
+          font-size: 165%;
+        }
+        .del form p,input
+        {
+          font-size: 160%;
+        }
+        .table form p,input
+        {
+          font-size: 160%;
+        }
+        .del form input
+        {
+          border: 2px solid black;
+          padding-left: 3px; 
+        }
+        .table form input
+        {
+          border: 2px solid black;
+          padding-left: 3px; 
+        }
+        .sub
+        {
+          margin-top: 30px;
+        }
+  		}
+    </style>
+</head>
+<body>
+    <h1 class="heading">Menu Items</h1>
+    <ul class="names">
+        {% for i in items %}
+    	<li>
+        	<h3>{{i.name}}</h3>
+        	<p>&#x20b9;{{i.price}}</p>
+        	<div style="clear: both;"></div>
+    	</li>
+        {% endfor %}
+    </ul>
+	<div class="content">
+		<div style="margin-bottom: 10px;">
+			<button onclick="Table()" class="btn">Add Menu Item</button>
+			<button onclick="Delete()" class="btn">Delete Menu Item</button>
+		</div>
+		<div class="del">
+			<form action="{{url_for('del_item', restaurant_id=id)}}" method="post">
+				<p>Name:</p><input type="text" name="name">
+				<input type="submit" name="submit" value="Delete" class="sub">
+			</form>
+		</div>
+		<div class="table">
+			<form action="{{url_for('AddItems', restaurant_id=id)}}" method="post">
+				<p>Name:</p><input type="text" name="name">
+				<p>Price:</p><input type="text" name="price">
+				<input type="submit" name="submit" class="sub">
+			</form>
+		</div>
+		<div style="text-align: center;">
+			<h4 class="bottom"><a href="{{url_for('HelloWorld')}}" style="color: black; text-decoration: none;">Home</a></h4>
+		</div>
+		
+	</div>
+
+
+
+	<script type="text/javascript">
+		function Table()
+		{
+			document.querySelector(".table").style.display="block";
+			document.querySelector(".del").style.display="none";
+
+		}
+		function Delete()
+		{
+			document.querySelector(".del").style.display="block";
+			document.querySelector(".table").style.display="none";
+
+		}
+	</script>
+</body>
+</html>
